@@ -23,6 +23,9 @@ def ask():
         # Extract the generated text
         bot_message = response[0]['generated_text'].strip()
 
+        # Add some basic response formatting
+        bot_message = bot_message.capitalize() + '.'
+
         return jsonify({'message': bot_message})
     except Exception as e:
         return jsonify({'error': str(e)})
