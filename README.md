@@ -37,9 +37,11 @@ A simple web interface for interacting with the ChatGPT AI model using Flask and
 3.  Open a web browser and navigate to `http://localhost:5000`
 4.  Start chatting with the AI!
 
-## Executed
+## Requirements
 
-![](/templates/Screenshot%202024-07-06%20at%2011.54.07 PM.png)
+1. Python 3.7 or later
+2. Flask `pip install flask`
+3. Transformers `pip install transformers`
 
 ## License
 
