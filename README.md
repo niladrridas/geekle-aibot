@@ -54,3 +54,8 @@ Contributions are welcome! If you'd like to improve the interface or add new fea
 ## Acknowledgments
 
 This project was inspired by the ChatGPT model and the Transformers library. Special thanks to the developers and maintainers of these projects!
+
+## Demo
+[Watch the demo on Vimeo](https://vimeo.com/979622778)
+
+![ChatGPT Interface Demo](https://via.placeholder.com/640x480.png?text=ChatGPT+Interface+Demo)
