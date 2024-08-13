@@ -1,61 +1,60 @@
-# ChatGPT Interface
+![Ss](https://github.com/niladrridas/geekle-aibot/blob/main/data/ss-tag-bank.png)
 
-A simple web interface for interacting with the ChatGPT AI model using Flask and Transformers.
+# Banking Interface
+
+A sleek web interface for interacting with an AI model using Flask and Transformers. This application provides a user-friendly chat experience with support for dark mode and robust error handling.
 
 ## Features
 
-*   User-friendly chat interface for asking questions and receiving responses
-*   Supports text-based input and output
-*   Toggleable dark mode for a sleeker look
-*   Error handling for unexpected errors
+- Interactive chat interface for conversing with an AI model
+- Supports text-based input and output
+- Toggleable dark mode for enhanced readability
+- Error handling for better user experience
 
 ## Technical Details
 
 ### Backend
 
-*   Built using Flask, a lightweight Python web framework
-*   Utilizes the Transformers library for text generation
-*   Handles POST requests to the `/ask` endpoint, generating responses based on user input
+- **Framework**: Flask, a lightweight Python web framework
+- **AI Model**: Uses the Transformers library to generate text
+- **Endpoint**: Handles POST requests at the `/ask` endpoint to generate responses based on user input
 
 ### Frontend
 
-*   Built using HTML, CSS, and JavaScript (with jQuery)
-*   Features a responsive design with a chat log and input field
-*   Supports dark mode toggle via a button click
+- **Technologies**: HTML, CSS, and JavaScript (with jQuery)
+- **Design**: Responsive design with a chat log and input field
+- **Dark Mode**: Toggle between light and dark themes with a button
 
 ### Code Structure
 
-*   `app.py`: The Flask application code, including the `/ask` endpoint and error handling
-*   `index.html`: The HTML template for the chat interface
-*   `style.css`: The CSS styles for the chat interface (not included in this repository)
-*   `script.js`: The JavaScript code for handling user input, sending requests to the backend, and updating the chat log
+- `app.py`: Contains the Flask application logic, including the `/ask` endpoint and error handling
+- `templates/index.html`: HTML template for the chat interface
+- `static/style.css`: CSS styles for the chat interface
+- `static/script.js`: JavaScript for handling user input, sending requests to the backend, and updating the chat log
 
 ## Getting Started
 
-1.  Install the required dependencies: `pip install flask transformers`
-2.  Run the application: `python app.py`
-3.  Open a web browser and navigate to `http://localhost:5000`
-4.  Start chatting with the AI!
+1. Install the required dependencies:
+   ```bash
+   pip install flask transformers
+   ```
+2. Run the application:
+   ```bash
+   python app.py
+   ```
+3. Open a web browser and navigate to `http://localhost:5000`
+4. Start interacting with the AI!
 
 ## Requirements
 
-1. Python 3.7 or later
-2. Flask `pip install flask`
-3. Transformers `pip install transformers`
+- Python 3.7 or later
+- Flask: `pip install flask`
+- Transformers: `pip install transformers`
 
 ## License
 
-This project is licensed under the MIT License. See `LICENSE` for details.
+This project is licensed under the MIT License. See `LICENSE` for details.
 
 ## Contributing
 
-Contributions are welcome! If you'd like to improve the interface or add new features, please submit a pull request.
-
-## Acknowledgments
-
-This project was inspired by the ChatGPT model and the Transformers library. Special thanks to the developers and maintainers of these projects!
-
-## Demo
-[Watch the demo on Vimeo](https://vimeo.com/979622778)
-
-![ChatGPT Interface Demo](https://via.placeholder.com/640x480.png?text=ChatGPT+Interface+Demo)
+Contributions are welcome! If you want to enhance the interface or add features, please submit a pull request.
