@@ -1,34 +1,187 @@
-from flask import Flask, request, jsonify, render_template
-import os
-from transformers import pipeline
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Banking Chat Interface">
+    <title>Banking Chat Interface</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa; /* Light background for default mode */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .chat-box {
+            max-width: 700px;
+            margin: auto;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode .chat-box {
+            background-color: #495057;
+        }
+        .chat-log {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 15px;
+            padding: 15px;
+            background-color: #f1f1f1;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode .chat-log {
+            background-color: #6c757d;
+            border-color: #495057;
+        }
+        .chat-log p {
+            padding: 10px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+        .chat-log .user-message {
+            text-align: right;
+            background-color: #007bff;
+            color: white;
+        }
+        .chat-log .bot-message {
+            text-align: left;
+            background-color: #e9ecef;
+        }
+        .dark-mode .chat-log .bot-message {
+            background-color: #adb5bd;
+        }
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            border: 3px solid #007bff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile h3 {
+            margin-top: 15px;
+            color: #007bff;
+        }
+        .dark-mode .profile h3 {
+            color: #ffffff;
+        }
+        .light-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .light-buttons i {
+            font-size: 2.5rem;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .light-buttons i:hover {
+            color: #007bff;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .btn {
+            border-radius: 20px;
+            font-size: 1.1rem;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-primary:focus {
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-box">
+                <div class="profile">
+            <img src="#" alt="Bank Logo">
+            <h3>Banking Assistant</h3>
+        </div>
+        <div class="light-buttons">
+            <i id="lightOn" class="fas fa-sun text-warning"></i>
+            <i id="lightOff" class="fas fa-moon text-secondary"></i>
+        </div>
+        <h2 class="text-center mb-4">Chat Interface</h2>
+        <div class="chat-log" aria-live="polite"></div>
+        <div class="form-group">
+            <input type="text" id="userMessage" class="form-control" placeholder="Type your message...">
+        </div>
+        <button id="sendMessage" class="btn btn-primary btn-block">Send</button>
+    </div>
 
-app = Flask(__name__)
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#sendMessage').click(function(){
+                var userMessage = $('#userMessage').val();
+                if (userMessage.trim() === "") {
+                    alert("Please enter a message");
+                    return;
+                }
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+                // Append user message to chat log
+                $('.chat-log').append('<p class="user-message">' + userMessage + '</p>');
+                $('#userMessage').val('');
 
-@app.route('/ask', methods=['POST'])
-def ask():
-    data = request.json
-    user_message = data['message']
+                // Send user message to server
+                $.ajax({
+                    url: '/ask',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({message: userMessage}),
+                    success: function(response){
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            var botMessage = response.message;
+                            $('.chat-log').append('<p class="bot-message">' + botMessage + '</p>');
+                            $('.chat-log').scrollTop($('.chat-log')[0].scrollHeight);
+                        }
+                    },
+                    error: function(){
+                        alert("An error occurred while sending your message.");
+                    }
+                });
+            });
 
-    try:
-        # Initialize the text generation pipeline
-        generator = pipeline('text-generation')
+            // Light On and Light Off button functionality
+            $('#lightOn').click(function(){
+                $('body').removeClass('dark-mode');
+            });
 
-        # Generate text
-        response = generator(user_message, max_length=150)
+            $('#lightOff').click(function(){
+                $('body').addClass('dark-mode');
+            });
 
-        # Extract the generated text
-        bot_message = response[0]['generated_text'].strip()
-
-        # Add some basic response formatting
-        bot_message = bot_message.capitalize() + '.'
-
-        return jsonify({'message': bot_message})
-    except Exception as e:
-        return jsonify({'error': str(e)})
-
-if __name__ == '__main__':
-    app.run(debug=True)
+            // Handle "Enter" key press for sending messages
+            $('#userMessage').keypress(function(e){
+                if (e.which == 13) {
+                    $('#sendMessage').click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
