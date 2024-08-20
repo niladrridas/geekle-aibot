@@ -13,6 +13,10 @@ A sleek web interface for interacting with an AI model using Flask and Transform
 
 ## Technical Details
 
+_Hackathon Visuals_
+![event](https://github.com/niladrridas/geekle-aibot/blob/main/data/event.png)
+![visual](https://github.com/niladrridas/geekle-aibot/blob/main/data/visual.png)
+
 ### Backend
 
 - **Framework**: Flask, a lightweight Python web framework
