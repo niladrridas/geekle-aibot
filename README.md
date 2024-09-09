@@ -30,6 +30,30 @@ _Hackathon Visuals_
 - **Design**: Responsive chat interface, optimized for both desktop and mobile.
 - **Dark Mode**: One-click toggle between light and dark themes for better user experience.
 
+## 🚀 Project Roadmap
+
+1. **Project Setup**
+   - Install necessary libraries: Flask, transformers.
+   - Initialize a Flask application.
+
+2. **Create Routes**
+   - Define a home route to render the main page.
+   - Define an `/ask` route to handle POST requests for generating responses.
+
+3. **Implement Text Generation**
+   - Use Hugging Face's `pipeline` for text generation.
+   - Process user input and generate a response using the text generation model.
+
+4. **Error Handling**
+   - Implement error handling to manage exceptions during text generation.
+
+5. **Testing and Debugging**
+   - Test the application to ensure it generates appropriate responses.
+   - Debug any issues that arise during testing.
+
+6. **Deployment**
+   - Deploy the Flask application to a web server or cloud platform.
+
 ### 🏗️ Code Architecture
 
 - **`app.py`**: The core of the Flask application, managing AI interactions and error handling.
